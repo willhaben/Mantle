@@ -133,7 +133,9 @@ NSString * const MTLBooleanValueTransformerName = @"MTLBooleanValueTransformerNa
 		
 		MTLValueTransformer *booleanValueTransformer = [MTLValueTransformer
 			transformerUsingReversibleBlock:^ id (NSNumber *boolean, BOOL *success, NSError **error) {
-				if (boolean == nil) return nil;
+				if (boolean == nil) {
+					return (NSNumber *)kCFBooleanFalse;
+				}
 
 				if (![boolean isKindOfClass:NSNumber.class]) {
 					if (error != NULL) {
